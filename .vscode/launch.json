@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/src/CommandAPI/bin/Debug/net5.0/CommandAPI.dll",
+            "program": "${workspaceFolder}/src/CommandAPI/bin/Debug/net6.0/CommandAPI.dll",
             "args": [],
             "cwd": "${workspaceFolder}/src/CommandAPI",
             "stopAtEntry": false,
