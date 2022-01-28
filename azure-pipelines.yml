@@ -3,7 +3,6 @@ trigger:
 
 pool:
   name: self-hosted
-  vmImage: 'ubuntu-latest'
 
 variables:
   buildConfiguration: 'Release'
