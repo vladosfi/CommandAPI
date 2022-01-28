@@ -1,0 +1,25 @@
+{
+    "dotnet-test-explorer.testProjectPath": "../test/CommandAPI.Tests",
+    "dotnet-test-explorer.autoWatch": true,
+    "dotnet-test-explorer.testArguments": "/p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./lcov.info",
+    "cSpell.words": [
+        "Xunit"
+    ],
+    "omnisharp.enableRoslynAnalyzers": true,
+    "csharpfixformat.sort.usings.enabled": true,
+    "csharpfixformat.sort.usings.systemFirst": false,
+    "csharpfixformat.style.braces.onSameLine": false,
+    "csharpfixformat.style.spaces.beforeParenthesis": false,
+    "csharpfixformat.style.spaces.afterParenthesis": false,
+    "editor.formatOnSave": true,
+    "settings": {
+        "documentationRules": {
+            "documentInterfaces": false,
+            "documentInternalElements": false,
+            "elementsMustBeDocumented": false
+        }
+    }
+    // "[csharp]": {
+    //     "editor.defaultFormatter": "Leopotam.csharpfixformat",
+    // }
+}

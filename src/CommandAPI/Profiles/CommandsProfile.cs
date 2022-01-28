@@ -1,21 +1,21 @@
-using AutoMapper;
-using CommandAPI.Dtos;
-using CommandAPI.Models;
-
 namespace CommandAPI.Profiles
 {
+    using AutoMapper;
+    using CommandAPI.Dtos;
+    using CommandAPI.Models;
+
     public class CommandsProfile : Profile
     {
         public CommandsProfile()
         {
-            //Source ➤ Target
-            CreateMap<Command, CommandReadDto>();
+            // Source ➤ Target
+            this.CreateMap<Command, CommandReadDto>();
 
-            CreateMap<CommandCreateDto, Command>();
+            this.CreateMap<CommandCreateDto, Command>();
 
-            CreateMap<CommandUpdateDto, Command>();
+            this.CreateMap<CommandUpdateDto, Command>();
 
-            CreateMap<Command, CommandUpdateDto>();
+            this.CreateMap<Command, CommandUpdateDto>();
         }
     }
 }

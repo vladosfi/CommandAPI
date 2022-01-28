@@ -1,17 +1,18 @@
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using CommandAPI.Data;
-using CommandAPI.Models;
-using AutoMapper;
-using CommandAPI.Dtos;
-using Microsoft.AspNetCore.JsonPatch;
-
 namespace CommandAPI.Controllers
 {
+    using System.Collections.Generic;
+    using AutoMapper;
+    using CommandAPI.Data;
+    using CommandAPI.Dtos;
+    using CommandAPI.Models;
+    using Microsoft.AspNetCore.JsonPatch;
+    using Microsoft.AspNetCore.Mvc;
+
     [Route("api/[controller]")]
     [ApiController]
     public class CommandsController : ControllerBase
     {
+        // Randoom change
         private readonly ICommandAPIRepo repository;
         private readonly IMapper mapper;
 
@@ -25,7 +26,7 @@ namespace CommandAPI.Controllers
         public ActionResult<IEnumerable<CommandReadDto>> GetAllCommands()
         {
             var commandItems = this.repository.GetAllCommands();
-            return Ok(this.mapper.Map<IEnumerable<CommandReadDto>>(commandItems));
+            return this.Ok(this.mapper.Map<IEnumerable<CommandReadDto>>(commandItems));
         }
 
         [HttpGet("{id}", Name = "GetCommandById")]
@@ -35,10 +36,10 @@ namespace CommandAPI.Controllers
 
             if (commandItem == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
-            return Ok(this.mapper.Map<CommandReadDto>(commandItem));
+            return this.Ok(this.mapper.Map<CommandReadDto>(commandItem));
         }
 
         [HttpPost]
@@ -51,8 +52,10 @@ namespace CommandAPI.Controllers
 
             var commandReadDto = this.mapper.Map<CommandReadDto>(commandModel);
 
-            return CreatedAtRoute(nameof(GetCommandById),
-                new { Id = commandReadDto.Id }, commandReadDto);
+            return this.CreatedAtRoute(
+                nameof(this.GetCommandById),
+                new { Id = commandReadDto.Id },
+                commandReadDto);
         }
 
         [HttpPut("{id}")]
@@ -62,14 +65,14 @@ namespace CommandAPI.Controllers
 
             if (commandModelFromRepo == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
             this.mapper.Map(commandUpdateDto, commandModelFromRepo);
             this.repository.UpdateCommand(commandModelFromRepo);
             this.repository.SaveChanges();
 
-            return NoContent();
+            return this.NoContent();
         }
 
         [HttpPatch("{id}")]
@@ -79,22 +82,22 @@ namespace CommandAPI.Controllers
 
             if (commandModelFromRepo == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
             var commandToPatch = this.mapper.Map<CommandUpdateDto>(commandModelFromRepo);
-            patchDoc.ApplyTo(commandToPatch, ModelState);
+            patchDoc.ApplyTo(commandToPatch, this.ModelState);
 
-            if (!TryValidateModel(commandToPatch))
+            if (!this.TryValidateModel(commandToPatch))
             {
-                return ValidationProblem(ModelState);
+                return this.ValidationProblem(this.ModelState);
             }
 
             this.mapper.Map(commandToPatch, commandModelFromRepo);
             this.repository.UpdateCommand(commandModelFromRepo);
             this.repository.SaveChanges();
 
-            return NoContent();
+            return this.NoContent();
         }
 
         [HttpDelete("{id}")]
@@ -104,13 +107,13 @@ namespace CommandAPI.Controllers
 
             if (commandModelFromRepo == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
             this.repository.DeleteCommand(commandModelFromRepo);
             this.repository.SaveChanges();
-            
-            return NoContent();
+
+            return this.NoContent();
         }
     }
 }

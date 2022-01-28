@@ -1,8 +1,8 @@
-using System.Collections.Generic;
-using CommandAPI.Models;
-
 namespace CommandAPI.Data
 {
+    using System.Collections.Generic;
+    using CommandAPI.Models;
+
     public interface ICommandAPIRepo
     {
         bool SaveChanges();

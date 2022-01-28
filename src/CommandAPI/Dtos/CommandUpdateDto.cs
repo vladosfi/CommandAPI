@@ -1,6 +1,7 @@
-using System.ComponentModel.DataAnnotations;
 namespace CommandAPI.Dtos
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class CommandUpdateDto
     {
         [Required]
@@ -9,7 +10,7 @@ namespace CommandAPI.Dtos
 
         [Required]
         public string Platform { get; set; }
-        
+
         [Required]
         public string CommandLine { get; set; }
     }
