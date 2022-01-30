@@ -1,6 +1,7 @@
 namespace CommandAPI
 {
     using CommandAPI.Data;
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.EntityFrameworkCore;
@@ -30,6 +31,14 @@ namespace CommandAPI
             builder.Password = this.Configuration["Password"];
 
             services.AddDbContext<CommandContext>(opt => opt.UseNpgsql(builder.ConnectionString));
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(opt =>
+            {
+                opt.Audience = this.Configuration["ResourceId"];
+                opt.Authority = $"{this.Configuration["Instance"]}{this.Configuration["TenantId"]}";
+            });
+
             services.AddControllers().AddNewtonsoftJson(s =>
             {
                 s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
@@ -52,6 +61,9 @@ namespace CommandAPI
             }
 
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

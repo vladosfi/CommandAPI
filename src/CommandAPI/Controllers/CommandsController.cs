@@ -5,6 +5,7 @@ namespace CommandAPI.Controllers
     using CommandAPI.Data;
     using CommandAPI.Dtos;
     using CommandAPI.Models;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.JsonPatch;
     using Microsoft.AspNetCore.Mvc;
 
@@ -29,6 +30,7 @@ namespace CommandAPI.Controllers
             return this.Ok(this.mapper.Map<IEnumerable<CommandReadDto>>(commandItems));
         }
 
+        [Authorize]
         [HttpGet("{id}", Name = "GetCommandById")]
         public ActionResult<CommandReadDto> GetCommandById(int id)
         {
